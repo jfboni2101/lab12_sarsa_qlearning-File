@@ -47,19 +47,19 @@ if __name__ == '__main__':
             while True:
 
                 # Choose agent's action (epsilon greedy policy)
-                action = ...  # TODO!
+                action = agent.get_action_eps_greedy(*state)
 
                 # Perform action in the environment (see `perform_action` in Environment)
                 new_state, reward, is_over = environment.perform_action(action)
 
                 # Update agent's Q function
-                # TODO!
+                agent.update_Q(state, action, reward, new_state)
 
                 # Update cumulative reward (just for logging purposes)
-                # TODO!
+                cumulative_reward += reward
 
                 # Update state
-                # TODO!
+                state = new_state
 
                 if is_over:
                     break
@@ -67,7 +67,7 @@ if __name__ == '__main__':
         elif args.mode == 'sarsa':
 
             # Get initial action
-            action = ...  # TODO!
+            action = agent.get_action_eps_greedy(*state)
 
             is_over = False
             while True:
@@ -77,13 +77,14 @@ if __name__ == '__main__':
                 new_state, reward, is_over = environment.perform_action(action)
 
                 # Update agent's Q function and get next action
-                # TODO!
+                next_action = agent.update_Q(state, action, reward, new_state)
 
                 # Update cumulative reward
-                # TODO!
+                cumulative_reward += reward
 
                 # Update state and action
-                # TODO!
+                state = new_state
+                action = next_action
 
                 if is_over:
                     break
@@ -104,13 +105,13 @@ if __name__ == '__main__':
         print(environment)
 
         # Choose agent's action (greedy policy)
-        action = ...  # TODO!
+        action = agent.get_action_greedy(*state)
 
         # Perform action in the environment
         new_state, reward, is_over = environment.perform_action(action)
 
         # Update state
-        # TODO!
+        state = new_state
 
         if is_over:
             break

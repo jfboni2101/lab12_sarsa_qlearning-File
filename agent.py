@@ -35,8 +35,12 @@ class Agent:
         action: int
           Action sampled according to epsilon-greedy policy.
         """
-        # TODO!
-        pass
+        eps = random.random()
+        if eps < self.epsilon:
+            return random.randint(0, self.n_actions - 1)
+        else:
+            return self.Q[r, c].argmax()
+
 
     def get_action_greedy(self, r, c):
         """
@@ -54,8 +58,7 @@ class Agent:
         action: int
           Action sampled according to greedy policy.
         """
-        # TODO!
-        pass
+        return self.Q[r, c].argmax()
 
     def update_Q(self, old_state, action, reward, new_state):
         raise NotImplementedError()
